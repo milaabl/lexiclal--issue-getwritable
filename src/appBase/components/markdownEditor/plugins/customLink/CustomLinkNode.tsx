@@ -22,7 +22,7 @@ export class CustomLinkNode extends LinkNode {
   __url: string;
   __target: string;
   __classNames: Array<string>;
-  __setfoo: (value : Array<string>) => void;
+  __setfoo: (value: Array<string>) => void;
   constructor(
     url: string,
     target: string,
@@ -30,11 +30,14 @@ export class CustomLinkNode extends LinkNode {
     key?: NodeKey
   ) {
     super(url, { target });
-    this.__url = url || 'https://';
-    this.__target = target || '_self';
+    this.__url = url || "https://";
+    this.__target = target || "_self";
     this.__classNames = classNames || [];
     this.__setfoo = function (value: Array<string>) {
-      this.getWritable().__classNames = value.join(' ').split(' ').filter((v : string) => v !== ' ');
+      this.getWritable().__classNames = value
+        .join(" ")
+        .split(" ")
+        .filter((v: string) => v !== " ");
     };
   }
 
@@ -65,14 +68,17 @@ export class CustomLinkNode extends LinkNode {
     );
   }*/
 
-  __setfoo (value : Array<string>) {
-    console.log('classname', value);
+  __setfoo(value: Array<string>) {
+    console.log("classname", value);
     const writable = this.getWritable();
 
-    writable.__classNames = value.join(' ').split(' ').filter((v : string) => v !== ' ');
+    writable.__classNames = value
+      .join(" ")
+      .split(" ")
+      .filter((v: string) => v !== " ");
 
     return null;
-  };
+  }
 
   updateDOM() {
     return false;
@@ -115,13 +121,16 @@ export function toggleCustomLinkNode({
   const addAttributesToLinkNode = (linkNode: CustomLinkNode) => {
     const dom = getNodeByKey(linkNode.getKey());
 
-    console.log(linkNode, 'dom', dom);
+    console.log(linkNode, "dom", dom);
 
     if (!dom) return;
 
-    const uniqueClassNames = new Set([...dom.getAttribute('class').split(' '), ...classNames]);
+    const uniqueClassNames = new Set([
+      ...dom.getAttribute("class").split(" "),
+      ...classNames,
+    ]);
 
-    console.log('classnames', Array.from(uniqueClassNames));
+    console.log("classnames", Array.from(uniqueClassNames));
 
     linkNode.setURL(url);
     linkNode.setTarget(target);
