@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Container } from "@mui/material";
-import { MarkdownEditor, MarkdownPreview } from "@/components";
+import { MarkdownEditor } from "./../appBase/components/markdownEditor/MarkdownEditor";
+import { MarkdownPreview } from "./../appBase/components/markdownEditor/MarkdownPreview";
 import { useState } from "react";
 
 export default function Localhost() {
@@ -21,9 +22,9 @@ export default function Localhost() {
       <br />
       <br />
       <MarkdownPreview value={val} />
-      <MarkdownEditor value={val} onChange={(v) => { 
+      <MarkdownEditor value={val} onChange={(v) => {
         console.log(v);
-        setVal(v) 
+        setVal(v)
       }} />
     </Container>
 
